@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.0",
-    "@react-pdf/renderer": "^1.6.12",
+    "@phuocng/react-pdf-viewer": "^1.7.0",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.2.2",
@@ -14,6 +14,7 @@
     "@types/react-dom": "^16.9.10",
     "@types/react-pdf": "^5.0.0",
     "classnames": "^2.2.6",
+    "pdfjs-dist": "^2.5.207",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^3.11.0",
@@ -47,6 +48,7 @@
     ]
   },
   "devDependencies": {
-    "@types/classnames": "^2.2.11"
+    "@types/classnames": "^2.2.11",
+    "@types/pdf-viewer-reactjs": "^2.0.0"
   }
 }

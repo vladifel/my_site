@@ -1,0 +1,41 @@
+#pdfviewer {
+    /* width: 600px; */
+    height: 100%;
+    margin: 0 auto;
+  }
+  #pdfviewer .viewer-layout-toolbar {
+    background: #000;
+    color: #fff;
+    border-radius: 1rem 1rem 0 0;
+  }
+  
+  #pdfviewer .viewer-icon{
+    stroke: #fff;
+    stroke-width: 3px;
+  }
+  
+  #pdfviewer .viewer-zoom-popover-target-arrow {
+    /* border-color: rgb(255 255 255 / 90%) transparent transparent; */
+    border-radius: 1rem;
+  }
+  
+  #pdfviewer .viewer-menu-item-label, #pdfviewer .viewer-search-popover-label, #pdfviewer .viewer-menu, #pdfviewer .viewer-menu .viewer-icon{
+    color: rgb(3, 169, 244);
+    stroke: rgb(3, 169, 244);
+  }
+
+  .viewer-layout-container {
+      border: none
+  }
+
+  .viewer-toolbar-item {
+    color: rgb(3, 169, 244);
+  }
+
+  #pdfviewer .viewer-icon {
+    stroke: rgb(3, 169, 244);
+  }
+
+  #pdfviewer .viewer-layout-toolbar {
+      background: #ffff;
+  }

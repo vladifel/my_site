@@ -1,18 +1,23 @@
 import React from "react";
 import classNames from "classnames";
 import { createStyles, WithStyles, withStyles } from "@material-ui/core/styles";
-//import { Document, Page, pdfjs } from 'react-pdf';
+/*@ts-ignore */
+import Viewer, { Worker } from '@phuocng/react-pdf-viewer';
+import '@phuocng/react-pdf-viewer/cjs/react-pdf-viewer.css';
 import Grid from "@material-ui/core/Grid";
 /*@ts-ignore */
 import cv from '../assets/Vladi_Feldman_CV.pdf';
+import './PdfDisplay.css';
+
 //pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const styles = () =>
     createStyles({
         document: {
-            maxHeight: '55rem !important',
-            width: '100%',
-            zIndex: 99,
+            height: '92%',
+            width: '94%',
+            backgroundColor: '#fff',
+            borderRadius: '1rem'
         },
         root: {
             width: '45rem',
@@ -33,21 +38,12 @@ export type IPdfDisplayCombinedProps = IPdfDisplayProps & WithStyles<typeof styl
 const PdfDisplay: React.FunctionComponent<IPdfDisplayCombinedProps> = (props: IPdfDisplayCombinedProps) => {
 
     return (
-        <Grid className={props.classes.root}>
-            {/* <Document
-                className={props.classes.document}
-                file={cv}
-                loading={'Loading PDF...'}
-                renderMode={'svg'}
-
-            >
-                <Page
-                    className={props.classes.document}
-                    pageNumber={1}
-                    scale={2}
-                    height={880}
-                />
-            </Document> */}
+        <Grid className={props.classes.document}>
+            <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.4.456/build/pdf.worker.min.js">
+                <div id="pdfviewer">
+                    <Viewer fileUrl={cv} />
+                </div>
+            </Worker>
         </Grid>
     );
 };
