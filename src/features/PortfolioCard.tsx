@@ -12,7 +12,6 @@ import { GrGithub } from 'react-icons/gr';
 import { FaLinkedin, FaFacebookSquare } from 'react-icons/fa';
 import { HiMail } from 'react-icons/hi';
 import { TiChevronRightOutline } from 'react-icons/ti';
-import im1 from '../assets/im1.jpg'
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -21,10 +20,15 @@ import CardActions from "@material-ui/core/CardActions";
 
 const styles = () =>
     createStyles({
+        cardImage: {
+            height: '25rem',
+            width: '100%'
+        },
         root: {
-            width: '20rem',
-            height: '30rem',
-
+            width: '45rem',
+            height: '40rem',
+            borderRadius: '1rem',
+            margin: '1rem'
         },
 
     });
@@ -45,6 +49,7 @@ const PortfolioCard: React.FunctionComponent<IPortfolioCardCombinedProps> = (pro
         <Card className={props.classes.root}>
             <CardActionArea>
                 <CardMedia
+                    className={props.classes.cardImage}
                     image={props.siteImage}
                     title={`${props.siteName} pic`}
                 />
