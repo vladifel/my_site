@@ -1,11 +1,11 @@
 import React from "react";
 import classNames from "classnames";
 import { createStyles, WithStyles, withStyles } from "@material-ui/core/styles";
-import { Document, Page, pdfjs } from 'react-pdf';
+//import { Document, Page, pdfjs } from 'react-pdf';
 import Grid from "@material-ui/core/Grid";
 /*@ts-ignore */
 import cv from '../assets/Vladi_Feldman_CV.pdf';
-pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+//pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const styles = () =>
     createStyles({
@@ -34,7 +34,7 @@ const PdfDisplay: React.FunctionComponent<IPdfDisplayCombinedProps> = (props: IP
 
     return (
         <Grid className={props.classes.root}>
-            <Document
+            {/* <Document
                 className={props.classes.document}
                 file={cv}
                 loading={'Loading PDF...'}
@@ -47,7 +47,7 @@ const PdfDisplay: React.FunctionComponent<IPdfDisplayCombinedProps> = (props: IP
                     scale={2}
                     height={880}
                 />
-            </Document>
+            </Document> */}
         </Grid>
     );
 };

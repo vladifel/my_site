@@ -20,15 +20,30 @@ import CardActions from "@material-ui/core/CardActions";
 
 const styles = () =>
     createStyles({
+        actionArea: {
+            height: '80%',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-start',
+            alignItems: 'flex-start',
+        },
+        cardActions: {
+            display: 'flex',
+            alignItems: 'flex-end',
+            height: '5rem'
+        },
         cardImage: {
-            height: '25rem',
-            width: '100%'
+            height: '60%',
+            width: '100%',
+            backgroundPosition: 'initial'
         },
         root: {
-            width: '45rem',
-            height: '40rem',
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            height: '100%',
             borderRadius: '1rem',
-            margin: '1rem'
         },
 
     });
@@ -47,7 +62,7 @@ const PortfolioCard: React.FunctionComponent<IPortfolioCardCombinedProps> = (pro
 
     return (
         <Card className={props.classes.root}>
-            <CardActionArea>
+            <CardActionArea className={props.classes.actionArea}>
                 <CardMedia
                     className={props.classes.cardImage}
                     image={props.siteImage}
@@ -62,7 +77,7 @@ const PortfolioCard: React.FunctionComponent<IPortfolioCardCombinedProps> = (pro
                     </Typography>
                 </CardContent>
             </CardActionArea>
-            <CardActions>
+            <CardActions className={props.classes.cardActions}>
                 <Button >
                     <Link
                         href={props.siteLink}

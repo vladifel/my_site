@@ -10,6 +10,7 @@ function App() {
         flexGrow: 1,
         height: '100vh',
         width: '100vw',
+        backgroundColor: 'transparent'
       }}>
         <LandingPage />
       </Paper>

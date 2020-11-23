@@ -14,7 +14,7 @@ import { FaLinkedin, FaFacebookSquare } from 'react-icons/fa';
 import { FiDownloadCloud } from 'react-icons/fi';
 import { HiMail } from 'react-icons/hi';
 import { TiChevronRightOutline } from 'react-icons/ti';
-import im1 from '../assets/im2.jpg'
+import me from '../assets/m5.jpg'
 import imdb from '../assets/imdb.jpg'
 import rpsls from '../assets/rpsls.jpg'
 import { JsxElement } from "typescript";
@@ -35,6 +35,36 @@ const styles = () =>
             justifyContent: 'center',
             position: 'absolute',
             bottom: 0
+        },
+        contactMeHeaderText: {
+            fontSize: '1.5rem',
+            fontWeight: 900
+        },
+        contactMeInner: {
+            height: '92%',
+            width: '95%',
+            backgroundColor: 'rgba(255,255,255,1)',
+            borderRadius: '1rem',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-start',
+            padding: '2rem'
+        },
+        contactMeOuter: {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '50%',
+            width: '50%',
+        },
+        contactMeLink: {
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center'
+        },
+        contactMeRow: {
+            display: 'flex',
+            flexDirection: 'row'
         },
         cvContainer: {
             width: '80rem',
@@ -79,7 +109,7 @@ const styles = () =>
         leftPart: {
             width: '20rem',
             height: '100%',
-            backgroundColor: '#03A9F4',
+            backgroundColor: 'rgba(3, 169, 244, 0.9)',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -115,15 +145,29 @@ const styles = () =>
             alignItems: 'center'
         },
         popOutContainer: {
-            backgroundColor: '#03A9F4',
+            backgroundColor: 'rgba(3, 169, 244, 0.9)',
             position: 'absolute',
-            borderRadius: '0.5rem',
+            borderRadius: '1rem',
             top: '20%',
             marginLeft: '2rem'
         },
+        portfolioCard: {
+            width: '46%',
+            height: '92%'
+        },
+        portfolioCardLeft: {
+            marginLeft: '2.5%'
+        },
+        portfolioCardRight: {
+            marginRight: '2.5%'
+        },
         portfolioContainer: {
-            hight: '50rem',
-            width: '94rem',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            height: '70%',
+            width: '70%',
         },
         rightPanel: {
             height: '100%',
@@ -133,7 +177,8 @@ const styles = () =>
             width: '100%',
             height: '100%',
             display: 'flex',
-            flexDirection: 'row'
+            flexDirection: 'row',
+            backgroundColor: 'transparent'
         },
 
     });
@@ -238,7 +283,7 @@ const portfolioComponent = (props: ILandingPageCombinedProps) => {
     const imdbDescription = "Wanna know who's the best film director of all time?";
     return (
         <Grid container className={classNames(props.classes.popOutContainer, props.classes.portfolioContainer)}>
-            <Grid item >
+            <Grid item className={classNames(props.classes.portfolioCard, props.classes.portfolioCardLeft)}>
                 <PortfolioCard
                     siteImage={rpsls}
                     siteLink={'https://rockpaperscissors-vladif.web.app/'}
@@ -246,7 +291,7 @@ const portfolioComponent = (props: ILandingPageCombinedProps) => {
                     siteDescription={rpslsDescription}
                 />
             </Grid>
-            <Grid item >
+            <Grid item className={classNames(props.classes.portfolioCard, props.classes.portfolioCardRight)}>
                 <PortfolioCard
                     siteImage={imdb}
                     siteLink={'https://imdb-stats-vladif.web.app/'}
@@ -254,6 +299,46 @@ const portfolioComponent = (props: ILandingPageCombinedProps) => {
                     siteDescription={imdbDescription}
                 />
             </Grid>
+        </Grid>
+    )
+}
+
+const contactMeComponent = (props: ILandingPageCombinedProps) => {
+    return (
+        <Grid className={classNames(props.classes.popOutContainer, props.classes.contactMeOuter)}>
+            <Grid container className={props.classes.contactMeInner}>
+                <Grid item>
+                    <Typography
+                        className={props.classes.contactMeHeaderText}
+                    >
+                        Contact Me
+                    </Typography>
+                    <Typography
+                    //className={props.classes.contactMeHeaderText}
+                    >
+                        Some text ... ...
+                    </Typography>
+                </Grid>
+                <Grid item className={props.classes.contactMeRow}>
+                    <Typography>
+                        E-Mail
+                    </Typography>
+                    <Link
+                        className={props.classes.contactMeLink}
+                        href={'mailto:vladi.fel@gmail.com'}
+                        target="_blank"
+                    >
+                        <HiMail
+                        //className={props.classes.headTextColor} 
+                        />
+                        <Typography>
+                            vladi.fel@gmail.com
+                    </Typography>
+                    </Link>
+                </Grid>
+
+            </Grid>
+
         </Grid>
     )
 }
@@ -288,7 +373,7 @@ const LandingPage: React.FunctionComponent<ILandingPageCombinedProps> = (props: 
                     <Avatar
                         className={props.classes.avatar}
                         alt="Vladi Feldman"
-                        src={im1}
+                        src={me}
                     />
                 </Grid>
                 <Grid item className={props.classes.headTextContainer}>
@@ -318,7 +403,9 @@ const LandingPage: React.FunctionComponent<ILandingPageCombinedProps> = (props: 
             <Grid container className={props.classes.rightPanel}>
                 {popOutOpen === 'Portfolio'
                     ? portfolioComponent(props)
-                    : undefined}
+                    : popOutOpen === 'Contact Me'
+                        ? contactMeComponent(props)
+                        : undefined}
             </Grid>
         </Grid>
     );
