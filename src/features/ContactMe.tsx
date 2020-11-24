@@ -28,6 +28,7 @@ const styles = () =>
             display: 'flex',
             flexDirection: 'row',
             alignItems: 'flex-end',
+            flexWrap: 'nowrap',
             marginTop: '10%'
         },
         contactMeHeaderText: {
@@ -37,9 +38,12 @@ const styles = () =>
         contactMeInner: {
             height: '91%',
             width: '92%',
+            minWidth: '321px',
+            minHeight: '321px',
             backgroundColor: 'rgba(255,255,255,1)',
             borderRadius: '1rem',
             display: 'flex',
+            flexWrap: 'nowrap',
             flexDirection: 'column',
             justifyContent: 'flex-start',
             padding: '2rem'

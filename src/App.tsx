@@ -12,6 +12,7 @@ function App() {
         <Paper style={{
           flexGrow: 1,
           height: '100vh',
+          minHeight: '35rem',
           width: '100vw',
           backgroundColor: 'transparent'
         }}>

@@ -1,17 +1,9 @@
-import React, { useState } from "react";
-import classNames from "classnames";
+import React from "react";
 import { createStyles, WithStyles, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
-import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
-import IconButton from "@material-ui/core/IconButton";
-import Popover from "@material-ui/core/Popover";
 import Button from '@material-ui/core/Button';
-import { GrGithub } from 'react-icons/gr';
-import { FaLinkedin, FaFacebookSquare } from 'react-icons/fa';
-import { HiMail } from 'react-icons/hi';
-import { TiChevronRightOutline } from 'react-icons/ti';
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -30,10 +22,14 @@ const styles = () =>
         cardActions: {
             display: 'flex',
             alignItems: 'flex-end',
-            height: '5rem'
+            marginBottom: '-5rem'
+        },
+        cardActionsContainer: {
+            display: 'flex',
+            alignItems: 'flex-end',
         },
         cardImage: {
-            height: '60%',
+            minHeight: '40%',
             width: '100%',
             backgroundPosition: 'initial'
         },
@@ -41,7 +37,7 @@ const styles = () =>
             width: '100%',
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'flex-start',
+            alignItems: 'space-between',
             height: '100%',
             borderRadius: '1rem',
             fontFamily: 'BioRhyme',
@@ -55,7 +51,8 @@ interface IPortfolioCardProps {
     siteImage: string;
     siteName: string;
     siteSecondary: string
-    siteDescription: string;
+    siteDescription1: string;
+    siteDescription2: string;
 }
 
 export type IPortfolioCardCombinedProps = IPortfolioCardProps & WithStyles<typeof styles>;
@@ -79,22 +76,27 @@ const PortfolioCard: React.FunctionComponent<IPortfolioCardCombinedProps> = (pro
                         {props.siteSecondary}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
-                        {props.siteDescription}
+                        {props.siteDescription1}
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                        {props.siteDescription2}
                     </Typography>
                 </CardContent>
             </CardActionArea>
-            <CardActions className={props.classes.cardActions}>
-                <Button >
-                    <Link
-                        href={props.siteLink}
-                        target="_blank"
-                    >
-                        <Typography>
-                            Visit Site
+            <Grid className={props.classes.cardActionsContainer}>
+                <CardActions className={props.classes.cardActions}>
+                    <Button >
+                        <Link
+                            href={props.siteLink}
+                            target="_blank"
+                        >
+                            <Typography>
+                                Visit Site
                         </Typography>
-                    </Link>
-                </Button>
-            </CardActions>
+                        </Link>
+                    </Button>
+                </CardActions>
+            </Grid>
         </Card>
     );
 };

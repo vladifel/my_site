@@ -1,163 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import classNames from "classnames";
-import { createStyles, WithStyles, withStyles } from "@material-ui/core/styles";
+import { WithStyles, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
-import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/IconButton";
-import Popover from "@material-ui/core/Popover";
 import Button from '@material-ui/core/Button';
 import { GrGithub } from 'react-icons/gr';
 import { FaLinkedin, FaFacebookSquare } from 'react-icons/fa';
-import { FiDownloadCloud } from 'react-icons/fi';
 import { HiMail } from 'react-icons/hi';
 import { TiChevronRightOutline } from 'react-icons/ti';
 import me from '../assets/m5.jpg'
-import { JsxElement } from "typescript";
-import PortfolioCard from "./PortfolioCard";
 import PdfDisplay from "./PdfDisplay";
 import ContactMe from "./ContactMe";
 import Portfolio from "./Portfolio";
-
-const styles = () =>
-    createStyles({
-        avatar: {
-            width: '10rem',
-            height: '10rem',
-        },
-        avatarContainer: {
-            marginTop: '2rem'
-        },
-        buttonsContainer: {
-            display: 'flex',
-            justifyContent: 'center',
-            position: 'absolute',
-            bottom: 0
-        },
-        contactMeOuter: {
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '50%',
-            width: '45%',
-        },
-        cvContainer: {
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            top: '12%',
-            height: '76%',
-            width: '60%',
-        },
-        headTextContainer: {
-            marginTop: '2rem',
-            textAlign: 'center'
-        },
-        headerTextButton: {
-            textTransform: 'none'
-        },
-        headTextColor: {
-            fontFamily: 'BioRhyme',
-            color: '#ffff'
-        },
-        headTextName: {
-            fontSize: '1.4rem',
-            fontWeight: 1000
-        },
-        headTextProf: {
-            fontSize: '1.1rem',
-        },
-        iconButton: {
-            "&:active, &:hover, &.Mui-focusVisible": {
-                backgroundColor: 'transparent',
-                fontSize: '1.7rem',
-            }
-        },
-        iconButtonCenter: {
-            "&:active, &:hover, &.Mui-focusVisible": {
-                padding: '0.55rem 0.65rem'
-            }
-        },
-        iconButtonLeft: {
-            "&:active, &:hover, &.Mui-focusVisible": {
-                padding: '0.55rem 0.55rem 0.55rem 0.75rem'
-            }
-        },
-        iconButtonRight: {
-            "&:active, &:hover, &.Mui-focusVisible": {
-                padding: '0.55rem 0.75rem 0.55rem 0.55rem'
-            }
-        },
-        leftPart: {
-            width: '20rem',
-            height: '100%',
-            backgroundColor: 'rgba(3, 169, 244, 0.85)',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'flex-start'
-        },
-        linkButton: {
-            textAlign: 'left',
-            marginLeft: '2rem',
-            "&:active, &:hover, &.Mui-focusVisible": {
-                backgroundColor: 'transparent',
-            }
-        },
-        linkButtonHover: {
-            fontWeight: 700
-        },
-        linkButtonChevron: {
-            fontSize: '1.2rem',
-            marginLeft: '0.3rem'
-        },
-        linkButtonCloud: {
-            fontSize: '1rem',
-            marginLeft: '0.5rem'
-        },
-        linksContainer: {
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-            marginTop: '3rem'
-        },
-        linkButtonCV: {
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center'
-        },
-        popOutContainer: {
-            backgroundColor: 'rgba(3, 169, 244, 0.9)',
-            position: 'absolute',
-            borderRadius: '1rem',
-            marginLeft: '2rem'
-        },
-        portfolioContainer: {
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            height: '70%',
-            width: '70%',
-        },
-        rightPanel: {
-            height: '100%',
-            width: '40rem'
-        },
-        root: {
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'row',
-            backgroundColor: 'transparent'
-        },
-        rootTop: {
-            top: '20%',
-        }
-    });
-
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { styles } from "./LandingPage.styles";
 
 interface IButtonActions {
     buttonHover: string;
@@ -222,15 +81,16 @@ const iconButtonComponent = (buttonType: string, linkText: string, icon: JSX.Ele
     )
 }
 
-const portfolioComponent = (props: ILandingPageCombinedProps) => {
+const portfolioComponent = (matches1000: boolean, props: ILandingPageCombinedProps) => {
     return (
         <Grid container className={classNames(
-            props.classes.rootTop,
             props.classes.popOutContainer,
-            props.classes.portfolioContainer
+            matches1000
+                ? props.classes.portfolioContainerSmall
+                : props.classes.portfolioContainer
         )
         }>
-            <Portfolio />
+            <Portfolio isSingleColumn={matches1000} />
         </Grid>
     )
 }
@@ -256,17 +116,9 @@ const myCVComponent = (props: ILandingPageCombinedProps) => {
     )
 }
 
-const myCV = (props: ILandingPageCombinedProps) => {
-    return (
-        <Grid className={classNames(props.classes.popOutContainer, props.classes.cvContainer)}>
-            <PdfDisplay />
-        </Grid>
-    )
-}
-
 const LandingPage: React.FunctionComponent<ILandingPageCombinedProps> = (props: ILandingPageCombinedProps) => {
     const [buttonHover, setButtonHover] = useState<string>('');
-    const [popOutOpen, setPopOutOpen] = useState<string>('');
+    const [popOutOpen, setPopOutOpen] = useState<string>('Portfolio');
 
     const handleHoverIn = (buttonType: string) => {
         setButtonHover(buttonType);
@@ -286,40 +138,50 @@ const LandingPage: React.FunctionComponent<ILandingPageCombinedProps> = (props: 
         handleHoverOut: handleHoverOut,
         handleButtonClick: handleButtonClick
     }
+    const matches = useMediaQuery('(max-width:600px)');
+    const matches1000 = useMediaQuery('(max-width:1000px)');
+    const matchesHeight = useMediaQuery('(max-height:560px)');
+    useEffect(() => {
+        console.log(matches, matchesHeight)
 
+    }, [matches, matchesHeight])
     return (
         <Grid className={props.classes.root}>
             <Grid container className={props.classes.leftPart}>
-                <Grid item className={props.classes.avatarContainer}>
-                    <Avatar
-                        className={props.classes.avatar}
-                        alt="Vladi Feldman"
-                        src={me}
-                    />
-                </Grid>
-                <Grid item className={props.classes.headTextContainer}>
-                    <Button
-                        className={props.classes.headerTextButton}
-                        onClick={() => setPopOutOpen('')}
-                    >
-                        <Typography
-                            className={classNames(props.classes.headTextName, props.classes.headTextColor)}
+                <Grid className={props.classes.upperContainer}>
+                    <Grid item className={props.classes.avatarContainer}>
+                        <Avatar
+                            className={props.classes.avatar}
+                            alt="Vladi Feldman"
+                            src={me}
+                        />
+                    </Grid>
+                    <Grid item className={matchesHeight
+                        ? props.classes.headTextContainerSmall
+                        : props.classes.headTextContainer}>
+                        <Button
+                            className={props.classes.headerTextButton}
+                            onClick={() => setPopOutOpen('')}
                         >
-                            Vladi Feldman
+                            <Typography
+                                className={classNames(props.classes.headTextName, props.classes.headTextColor)}
+                            >
+                                Vladi Feldman
                     </Typography>
-                    </Button>
-                    <Button
-                        className={props.classes.headerTextButton}
-                        onClick={() => setPopOutOpen('')}
-                    >
-                        <Typography
-                            className={classNames(props.classes.headTextProf, props.classes.headTextColor)}
+                        </Button>
+                        <Button
+                            className={props.classes.headerTextButton}
+                            onClick={() => setPopOutOpen('')}
                         >
-                            Front-End Developer
+                            <Typography
+                                className={classNames(props.classes.headTextProf, props.classes.headTextColor)}
+                            >
+                                Front-End Developer
                     </Typography>
-                    </Button>
+                        </Button>
+                    </Grid>
                 </Grid>
-                <Grid container className={props.classes.linksContainer}>
+                <Grid container className={classNames(props.classes.linksContainer, matchesHeight && props.classes.linksContainerSmall)}>
                     {linkButtonComponent('Portfolio', buttonActions, props)}
                     {linkButtonComponent('My CV', buttonActions, props)}
                     {linkButtonComponent('Contact Me', buttonActions, props)}
@@ -333,7 +195,7 @@ const LandingPage: React.FunctionComponent<ILandingPageCombinedProps> = (props: 
             </Grid>
             <Grid container className={props.classes.rightPanel}>
                 {popOutOpen === 'Portfolio'
-                    ? portfolioComponent(props)
+                    ? portfolioComponent(matches1000, props)
                     : popOutOpen === 'My CV'
                         ? myCVComponent(props)
                         : popOutOpen === 'Contact Me'
