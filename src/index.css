@@ -1,6 +1,5 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Roboto';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background:  url('./assets/pano.jpg') no-repeat center center fixed; 
@@ -11,10 +10,15 @@ body {
 
 }
 
-code {
+@font-face {
+  font-family: 'BioRhyme';
+  src: local('BioRhyme'), url(./fonts/BioRhyme-Regular.ttf) format('truetype');
+}
+
+/* code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
+} */
 
 /* html { 
   background:  url('./assets/pano.jpg') no-repeat center center fixed; 

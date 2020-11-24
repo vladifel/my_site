@@ -59,6 +59,7 @@ const styles = () =>
             textTransform: 'none'
         },
         headTextColor: {
+            fontFamily: 'BioRhyme',
             color: '#ffff'
         },
         headTextName: {
@@ -248,6 +249,14 @@ const contactMeComponent = (props: ILandingPageCombinedProps) => {
 }
 
 const myCVComponent = (props: ILandingPageCombinedProps) => {
+    return (
+        <Grid className={classNames(props.classes.popOutContainer, props.classes.cvContainer)}>
+            <PdfDisplay />
+        </Grid>
+    )
+}
+
+const myCV = (props: ILandingPageCombinedProps) => {
     return (
         <Grid className={classNames(props.classes.popOutContainer, props.classes.cvContainer)}>
             <PdfDisplay />

@@ -44,6 +44,8 @@ const styles = () =>
             alignItems: 'flex-start',
             height: '100%',
             borderRadius: '1rem',
+            fontFamily: 'BioRhyme',
+
         },
 
     });
@@ -52,6 +54,7 @@ interface IPortfolioCardProps {
     siteLink: string;
     siteImage: string;
     siteName: string;
+    siteSecondary: string
     siteDescription: string;
 }
 
@@ -71,6 +74,9 @@ const PortfolioCard: React.FunctionComponent<IPortfolioCardCombinedProps> = (pro
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
                         {props.siteName}
+                    </Typography>
+                    <Typography gutterBottom variant="h6" component="h3">
+                        {props.siteSecondary}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
                         {props.siteDescription}

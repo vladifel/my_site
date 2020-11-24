@@ -30,9 +30,10 @@ export type IPortfolioCombinedProps = IPortfolioProps & WithStyles<typeof styles
 
 
 const Portfolio: React.FunctionComponent<IPortfolioCombinedProps> = (props: IPortfolioCombinedProps) => {
-    const rpslsDescription = "Rock-Paper-Scissors-Lizard-Spock. Sheldon's favorite game. Written using React, CSS3 for styling and animations, utilizing React-Router for navigation";
-    const imdbDescription = "Wanna know who's the best film director of all time?";
-
+    const rpslsDescription = "A responsive web application done using React framework. Pure CSS3 was used for styling and animations, utilizing React-Router for navigation";
+    const rpslsSecondary = "Rock-Paper-Scissors-Lizard-Spock. Sheldon's favorite game";
+    const imdbDescription = "A beautiful web site aiming to help users .. ... ... React - Redux web App, styled using the Material-UI design system & guidelines and using Material-UI components. Based Imdb's unofficial Api. Hosted on FireBase";
+    const imdbSecondary = "Wanna know who's the best film director of all time?"
     return (
         <Fragment>
             <Grid item className={classNames(props.classes.portfolioCard, props.classes.portfolioCardLeft)}>
@@ -40,14 +41,16 @@ const Portfolio: React.FunctionComponent<IPortfolioCombinedProps> = (props: IPor
                     siteImage={rpsls}
                     siteLink={'https://rockpaperscissors-vladif.web.app/'}
                     siteName={'RPSLS'}
+                    siteSecondary={rpslsSecondary}
                     siteDescription={rpslsDescription}
                 />
             </Grid>
             <Grid item className={classNames(props.classes.portfolioCard, props.classes.portfolioCardRight)}>
                 <PortfolioCard
                     siteImage={imdb}
-                    siteLink={'https://imdb-stats-vladif.web.app/'}
+                    siteLink={'https://imdb-directors-stats.web.app/'}
                     siteName={"Film Directors' ratings"}
+                    siteSecondary={imdbSecondary}
                     siteDescription={imdbDescription}
                 />
             </Grid>
