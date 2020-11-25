@@ -21,8 +21,10 @@ export const styles = () =>
             alignItems: 'center',
             height: '50%',
             width: '45%',
+            maxWidth: '40rem',
             minWidth: '381px',
-            minHeight: '351px'
+            minHeight: '351px',
+            maxHeight: '20rem'
         },
         cvContainer: {
             display: 'flex',
@@ -77,6 +79,7 @@ export const styles = () =>
         },
         leftPart: {
             width: '20%',
+            maxWidth: '20rem',
             minWidth: '12rem',
             height: '100%',
             backgroundColor: 'rgba(3, 169, 244, 0.85)',
@@ -131,7 +134,9 @@ export const styles = () =>
             alignItems: 'center',
             top: '12%',
             height: '85%',
+            maxHeight: '50rem',
             width: '70%',
+            maxWidth: '80rem'
         },
         portfolioContainerSmall: {
             display: 'flex',
