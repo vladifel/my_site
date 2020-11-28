@@ -34,7 +34,8 @@ const styles = () =>
             margin: '1rem 0',
             width: '92%',
             height: '48%',
-            minHeight: '32rem'
+            minWidth: '16rem',
+            minHeight: '42rem'
         },
         portfolioCardLeft: {
             marginLeft: '2.5%'

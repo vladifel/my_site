@@ -60,12 +60,12 @@ export const styles = () =>
             justifyContent: 'center',
             alignItems: 'center',
             height: '50%',
-            width: '90%',
+            width: '98%',
             maxWidth: '40rem',
-            minWidth: '381px',
+            minWidth: '351px',
             minHeight: '351px',
             maxHeight: '20rem',
-            left: '5%'
+            left: '1%'
         },
         cvContainer: {
             display: 'flex',
