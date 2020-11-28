@@ -1,6 +1,9 @@
-# Getting Started with Create React App
+# My Site - Vladi Feldman
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A website showcasing my professional side. Links to my CV and to some of my projects.
+
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and uses [Material-UI](https://material-ui.com/) for styling. The site is hosted on [Firebase](https://firebase.google.com/).
 
 ## Available Scripts
 
