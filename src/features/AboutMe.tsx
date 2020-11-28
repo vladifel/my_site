@@ -74,7 +74,6 @@ const styles = () =>
         contactMeInner: {
             height: '92%',
             width: '92%',
-            minWidth: '321px',
             minHeight: '321px',
             backgroundColor: 'rgba(255,255,255,1)',
             borderRadius: '1rem',
