@@ -1,12 +1,13 @@
 ::-webkit-scrollbar-thumb {
     background-color:rgba(0, 0, 0, 0.15);
-    border-radius: 0.1rem;
+    border-radius: 2rem;
     border: none;
 }
 
 ::-webkit-scrollbar {
-    width: 0.625rem;
+    width: 0.8rem;
     background-color: aliceblue;
+        border-radius: 0 1rem 1rem 0;
 }
 
 input:-webkit-autofill,

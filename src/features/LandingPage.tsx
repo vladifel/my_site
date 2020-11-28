@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import classNames from "classnames";
 import { WithStyles, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -11,6 +11,7 @@ import { GrGithub } from 'react-icons/gr';
 import { FaLinkedin, FaFacebookSquare } from 'react-icons/fa';
 import { HiMail } from 'react-icons/hi';
 import { TiChevronRightOutline } from 'react-icons/ti';
+import { GiHamburgerMenu } from 'react-icons/gi';
 import me from '../assets/m5.jpg'
 import PdfDisplay from "./PdfDisplay";
 import ContactMe from "./ContactMe";
@@ -18,6 +19,7 @@ import Portfolio from "./Portfolio";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { styles } from "./LandingPage.styles";
 import AboutMe from "./AboutMe";
+import Modal from "@material-ui/core/Modal";
 
 interface IButtonActions {
     buttonHover: string;
@@ -25,6 +27,13 @@ interface IButtonActions {
     handleHoverOut: () => void;
     handleButtonClick: (event: any) => void;
     popOutOpen: string;
+    setPopOutOpen: (buttonType: string) => void;
+}
+
+interface IModalActions {
+    modalOpen: boolean;
+    handleOpenModal: () => void;
+    handleCloseModal: () => void;
 }
 interface ILandingPageProps {
 
@@ -88,12 +97,14 @@ const iconButtonComponent = (buttonType: string, linkText: string, icon: JSX.Ele
     )
 }
 
-const aboutMeComponent = (matches1000: boolean, props: ILandingPageCombinedProps) => {
+const aboutMeComponent = (matches1000: boolean, matchesMobile: boolean, props: ILandingPageCombinedProps) => {
     return (
         <Grid container className={classNames(
             props.classes.popOutContainer,
             matches1000
-                ? props.classes.aboutMeOuterSmall
+                ? matchesMobile
+                    ? props.classes.aboutMeOuterMobile
+                    : props.classes.aboutMeOuterSmall
                 : props.classes.aboutMeOuter)
         }>
             <AboutMe />
@@ -101,12 +112,14 @@ const aboutMeComponent = (matches1000: boolean, props: ILandingPageCombinedProps
     )
 }
 
-const portfolioComponent = (matches1000: boolean, props: ILandingPageCombinedProps) => {
+const portfolioComponent = (matches1000: boolean, matchesMobile: boolean, props: ILandingPageCombinedProps) => {
     return (
         <Grid container className={classNames(
             props.classes.popOutContainer,
             matches1000
-                ? props.classes.portfolioContainerSmall
+                ? matchesMobile
+                    ? props.classes.portfolioContainerMobile
+                    : props.classes.portfolioContainerSmall
                 : props.classes.portfolioContainer
         )
         }>
@@ -115,12 +128,14 @@ const portfolioComponent = (matches1000: boolean, props: ILandingPageCombinedPro
     )
 }
 
-const contactMeComponent = (props: ILandingPageCombinedProps) => {
+const contactMeComponent = (matchesMobile: boolean, props: ILandingPageCombinedProps) => {
     return (
         <Grid className={classNames(
             props.classes.rootTop,
             props.classes.popOutContainer,
-            props.classes.contactMeOuter
+            matchesMobile
+                ? props.classes.contactMeOuterMobile
+                : props.classes.contactMeOuter
         )
         }>
             <ContactMe />
@@ -128,17 +143,107 @@ const contactMeComponent = (props: ILandingPageCombinedProps) => {
     )
 }
 
-const myCVComponent = (props: ILandingPageCombinedProps) => {
+const myCVComponent = (matchesMobile: boolean, props: ILandingPageCombinedProps) => {
     return (
-        <Grid className={classNames(props.classes.popOutContainer, props.classes.cvContainer)}>
+        <Grid className={classNames(
+            props.classes.popOutContainer,
+            matchesMobile
+                ? props.classes.cvContainerMobile
+                : props.classes.cvContainer
+        )}
+        >
             <PdfDisplay />
         </Grid>
+    )
+}
+
+const leftContainer = (matchesHeight: boolean, buttonActions: IButtonActions, props: ILandingPageCombinedProps, isMobile?: boolean) => {
+    return (
+        <Grid container className={isMobile ? props.classes.leftPartMobile : props.classes.leftPart}>
+            <Grid className={props.classes.upperContainer}>
+                <Grid item className={props.classes.avatarContainer}>
+                    <Avatar
+                        className={props.classes.avatar}
+                        alt="Vladi Feldman"
+                        src={me}
+                    />
+                </Grid>
+                <Grid item className={matchesHeight
+                    ? props.classes.headTextContainerSmall
+                    : props.classes.headTextContainer}>
+                    <Button
+                        className={props.classes.headerTextButton}
+                        onClick={() => buttonActions.handleButtonClick('')}
+                    >
+                        <Typography
+                            className={classNames(props.classes.headTextName, props.classes.headTextColor)}
+                        >
+                            Vladi Feldman
+                    </Typography>
+                    </Button>
+                    <Button
+                        className={props.classes.headerTextButton}
+                        onClick={() => buttonActions.handleButtonClick('')}
+                    >
+                        <Typography
+                            className={classNames(props.classes.headTextProf, props.classes.headTextColor)}
+                        >
+                            Front-End Developer
+                    </Typography>
+                    </Button>
+                </Grid>
+            </Grid>
+            <Grid container className={classNames(props.classes.linksContainer, matchesHeight && props.classes.linksContainerSmall)}>
+                {linkButtonComponent('About Me', buttonActions, props)}
+                {linkButtonComponent('Portfolio', buttonActions, props)}
+                {linkButtonComponent('My CV', buttonActions, props)}
+                {linkButtonComponent('Contact Me', buttonActions, props)}
+            </Grid>
+            <Grid container className={props.classes.buttonsContainer}>
+                {iconButtonComponent('left', 'https://github.com/vladifel', <GrGithub className={props.classes.headTextColor} />, props)}
+                {iconButtonComponent('center', 'https://www.linkedin.com/in/vladif/', <FaLinkedin className={props.classes.headTextColor} />, props)}
+                {iconButtonComponent('center', 'https://www.facebook.com/vladi.feldman/', <FaFacebookSquare className={props.classes.headTextColor} />, props)}
+                {iconButtonComponent('right', 'mailto:vladi.fel@gmail.com', <HiMail className={props.classes.headTextColor} />, props)}
+            </Grid>
+        </Grid>
+    )
+}
+
+const leftContainerMobile = (matchesHeight: boolean, buttonActions: IButtonActions, modalActions: IModalActions, props: ILandingPageCombinedProps) => {
+    return (
+        <Fragment>
+            <Grid className={props.classes.topBar}>
+                <IconButton
+                    className={props.classes.hamburgerButton}
+                    onClick={modalActions.handleOpenModal}
+                >
+                    <GiHamburgerMenu
+                        className={props.classes.headTextColor}
+                    />
+                </IconButton>
+                <Button
+                    className={props.classes.hamburgerTextButton}
+                    onClick={modalActions.handleOpenModal}
+                >
+                    <Typography className={props.classes.headTextColor}>
+                        Vladi Feldman
+                </Typography>
+                </Button>
+            </Grid>
+            <Modal
+                open={modalActions.modalOpen}
+                onClose={modalActions.handleCloseModal}
+            >
+                {leftContainer(matchesHeight, buttonActions, props, true)}
+            </Modal>
+        </Fragment>
     )
 }
 
 const LandingPage: React.FunctionComponent<ILandingPageCombinedProps> = (props: ILandingPageCombinedProps) => {
     const [buttonHover, setButtonHover] = useState<string>('');
     const [popOutOpen, setPopOutOpen] = useState<string>('About Me');
+    const [modalOpen, setModalOpen] = useState<boolean>(true);
 
     const handleHoverIn = (buttonType: string) => {
         setButtonHover(buttonType);
@@ -149,7 +254,8 @@ const LandingPage: React.FunctionComponent<ILandingPageCombinedProps> = (props: 
     }
 
     const handleButtonClick = (event: any) => {
-        setPopOutOpen(event.target.textContent);
+        event === '' ? setPopOutOpen('') : setPopOutOpen(event.target.textContent);
+        handleCloseModal();
     }
 
     const buttonActions: IButtonActions = {
@@ -157,69 +263,42 @@ const LandingPage: React.FunctionComponent<ILandingPageCombinedProps> = (props: 
         handleHoverIn: handleHoverIn,
         handleHoverOut: handleHoverOut,
         handleButtonClick: handleButtonClick,
-        popOutOpen: popOutOpen
+        popOutOpen: popOutOpen,
+        setPopOutOpen: setPopOutOpen
     }
-    const matches = useMediaQuery('(max-width:600px)');
+
+    const handleOpenModal = () => {
+        setModalOpen(true);
+    }
+
+    const handleCloseModal = () => {
+        setModalOpen(false);
+    }
+
+    const modalActions: IModalActions = {
+        modalOpen: modalOpen,
+        handleOpenModal: handleOpenModal,
+        handleCloseModal: handleCloseModal
+    }
+    const matchesMobile = useMediaQuery('(max-width:700px)');
     const matches1000 = useMediaQuery('(max-width:1000px)');
     const matchesHeight = useMediaQuery('(max-height:560px)');
     return (
         <Grid className={props.classes.root}>
-            <Grid container className={props.classes.leftPart}>
-                <Grid className={props.classes.upperContainer}>
-                    <Grid item className={props.classes.avatarContainer}>
-                        <Avatar
-                            className={props.classes.avatar}
-                            alt="Vladi Feldman"
-                            src={me}
-                        />
-                    </Grid>
-                    <Grid item className={matchesHeight
-                        ? props.classes.headTextContainerSmall
-                        : props.classes.headTextContainer}>
-                        <Button
-                            className={props.classes.headerTextButton}
-                            onClick={() => setPopOutOpen('')}
-                        >
-                            <Typography
-                                className={classNames(props.classes.headTextName, props.classes.headTextColor)}
-                            >
-                                Vladi Feldman
-                    </Typography>
-                        </Button>
-                        <Button
-                            className={props.classes.headerTextButton}
-                            onClick={() => setPopOutOpen('')}
-                        >
-                            <Typography
-                                className={classNames(props.classes.headTextProf, props.classes.headTextColor)}
-                            >
-                                Front-End Developer
-                    </Typography>
-                        </Button>
-                    </Grid>
-                </Grid>
-                <Grid container className={classNames(props.classes.linksContainer, matchesHeight && props.classes.linksContainerSmall)}>
-                    {linkButtonComponent('About Me', buttonActions, props)}
-                    {linkButtonComponent('Portfolio', buttonActions, props)}
-                    {linkButtonComponent('My CV', buttonActions, props)}
-                    {linkButtonComponent('Contact Me', buttonActions, props)}
-                </Grid>
-                <Grid container className={props.classes.buttonsContainer}>
-                    {iconButtonComponent('left', 'https://github.com/vladifel', <GrGithub className={props.classes.headTextColor} />, props)}
-                    {iconButtonComponent('center', 'https://www.linkedin.com/in/vladif/', <FaLinkedin className={props.classes.headTextColor} />, props)}
-                    {iconButtonComponent('center', 'https://www.facebook.com/vladi.feldman/', <FaFacebookSquare className={props.classes.headTextColor} />, props)}
-                    {iconButtonComponent('right', 'mailto:vladi.fel@gmail.com', <HiMail className={props.classes.headTextColor} />, props)}
-                </Grid>
-            </Grid>
-            <Grid container className={props.classes.rightPanel}>
+            {
+                matchesMobile
+                    ? leftContainerMobile(matchesHeight, buttonActions, modalActions, props)
+                    : leftContainer(matchesHeight, buttonActions, props)
+            }
+            <Grid container className={matchesMobile ? props.classes.rightPanelMobile : props.classes.rightPanel}>
                 {popOutOpen === 'Portfolio'
-                    ? portfolioComponent(matches1000, props)
+                    ? portfolioComponent(matches1000, matchesMobile, props)
                     : popOutOpen === 'My CV'
-                        ? myCVComponent(props)
+                        ? myCVComponent(matchesMobile, props)
                         : popOutOpen === 'Contact Me'
-                            ? contactMeComponent(props)
+                            ? contactMeComponent(matchesMobile, props)
                             : popOutOpen === 'About Me'
-                                ? aboutMeComponent(matches1000, props)
+                                ? aboutMeComponent(matches1000, matchesMobile, props)
                                 : undefined}
             </Grid>
         </Grid>

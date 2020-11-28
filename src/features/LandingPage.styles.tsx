@@ -12,6 +12,7 @@ export const styles = () =>
             maxWidth: '40rem',
             minWidth: '381px',
             minHeight: '636px',
+            marginLeft: '2rem'
         },
         aboutMeOuterSmall: {
             display: 'flex',
@@ -20,6 +21,16 @@ export const styles = () =>
             top: '10%',
             height: '75%',
             width: '60%',
+            marginLeft: '2rem'
+        },
+        aboutMeOuterMobile: {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            top: '10%',
+            height: '75%',
+            width: '90%',
+            left: '5%'
         },
         avatar: {
             width: '10rem',
@@ -41,7 +52,20 @@ export const styles = () =>
             maxWidth: '40rem',
             minWidth: '381px',
             minHeight: '351px',
-            maxHeight: '20rem'
+            maxHeight: '20rem',
+            marginLeft: '2rem'
+        },
+        contactMeOuterMobile: {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '50%',
+            width: '90%',
+            maxWidth: '40rem',
+            minWidth: '381px',
+            minHeight: '351px',
+            maxHeight: '20rem',
+            left: '5%'
         },
         cvContainer: {
             display: 'flex',
@@ -50,6 +74,22 @@ export const styles = () =>
             top: '12%',
             height: '76%',
             width: '60%',
+            marginLeft: '2rem'
+        },
+        cvContainerMobile: {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            top: '12%',
+            height: '76%',
+            width: '90%',
+            left: '5%'
+        },
+        hamburgerButton: {
+            margin: '0 0.5rem 0 0.2rem 0'
+        },
+        hamburgerTextButton: {
+            textTransform: 'none'
         },
         headTextContainer: {
             marginTop: '2rem',
@@ -107,7 +147,21 @@ export const styles = () =>
             alignItems: 'center',
             justifyContent: 'space-between',
             position: 'fixed',
-
+        },
+        leftPartMobile: {
+            width: '20%',
+            maxWidth: '20rem',
+            minWidth: '12.5rem',
+            height: 'fill-available',
+            backgroundColor: 'rgba(3, 169, 244, 0.85)',
+            display: 'flex',
+            flexDirection: 'column',
+            flex: 1,
+            flexWrap: 'nowrap',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            position: 'absolute',
+            outline: 'none'
         },
         linkButton: {
             textAlign: 'left',
@@ -145,7 +199,6 @@ export const styles = () =>
             backgroundColor: 'rgba(3, 169, 244, 0.9)',
             position: 'absolute',
             borderRadius: '1rem',
-            marginLeft: '2rem'
         },
         portfolioContainer: {
             display: 'flex',
@@ -154,9 +207,11 @@ export const styles = () =>
             alignItems: 'center',
             top: '12%',
             height: '85%',
-            maxHeight: '50rem',
+            maxHeight: '40rem',
+            minHeight: '35rem',
             width: '70%',
-            maxWidth: '80rem'
+            maxWidth: '80rem',
+            marginLeft: '2rem'
         },
         portfolioContainerSmall: {
             display: 'flex',
@@ -166,11 +221,26 @@ export const styles = () =>
             top: '10%',
             height: '85%',
             width: '70%',
+            marginLeft: '2rem'
+        },
+        portfolioContainerMobile: {
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            top: '10%',
+            height: '85%',
+            width: '90%',
+            left: '5%'
         },
         rightPanel: {
             height: '100%',
             width: '40rem',
             marginLeft: 'max(11rem, 20%)'
+        },
+        rightPanelMobile: {
+            height: '100%',
+            width: '100%'
         },
         root: {
             display: 'flex',
@@ -179,6 +249,15 @@ export const styles = () =>
         },
         rootTop: {
             top: '20%',
+        },
+        topBar: {
+            display: 'flex',
+            alignItems: 'center',
+            position: 'absolute',
+            top: 0,
+            height: '2rem',
+            width: '100%',
+            backgroundColor: 'rgba(3, 169, 244, 0.85)',
         },
         upperContainer: {
             display: 'flex',

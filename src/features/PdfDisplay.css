@@ -37,3 +37,43 @@
   #pdfviewer .viewer-layout-toolbar {
       background: #ffff;
   }
+
+@media (max-width:1000px) {
+  
+  .viewer-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;
+    height: 4rem;
+  }
+
+  .viewer-layout-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 4.3rem calc(100% - 4.3rem);
+    height: 100%;
+    position: relative;
+    width: 100%;
+  }
+}
+
+@media (max-width:400px) {
+  
+  .viewer-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;
+    height: 7rem;
+  }
+
+  .viewer-layout-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 7rem calc(100% - 7rem);
+    height: 100%;
+    position: relative;
+    width: 100%;
+  }
+}

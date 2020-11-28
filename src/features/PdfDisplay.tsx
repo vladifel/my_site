@@ -16,13 +16,6 @@ const styles = () =>
             backgroundColor: '#fff',
             borderRadius: '1rem'
         },
-        root: {
-            width: '45rem',
-            height: '55rem',
-            borderRadius: '1rem',
-            margin: '1rem'
-        },
-
     });
 
 interface IPdfDisplayProps {
