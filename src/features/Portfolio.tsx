@@ -2,7 +2,6 @@ import React from "react";
 import classNames from "classnames";
 import { createStyles, WithStyles, withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import imdb from '../assets/imdb.jpg'
 import rpsls from '../assets/rpsls.jpg'
 import PortfolioCard from "./PortfolioCard";

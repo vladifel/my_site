@@ -2,6 +2,25 @@ import createStyles from "@material-ui/core/styles/createStyles";
 
 export const styles = () =>
     createStyles({
+        aboutMeOuter: {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            top: '12%',
+            height: '68%',
+            width: '70%',
+            maxWidth: '40rem',
+            minWidth: '381px',
+            minHeight: '636px',
+        },
+        aboutMeOuterSmall: {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            top: '10%',
+            height: '75%',
+            width: '60%',
+        },
         avatar: {
             width: '10rem',
             height: '10rem',
@@ -12,8 +31,6 @@ export const styles = () =>
         buttonsContainer: {
             display: 'flex',
             justifyContent: 'center',
-            //position: 'absolute',
-            //bottom: 0
         },
         contactMeOuter: {
             display: 'flex',
@@ -80,14 +97,17 @@ export const styles = () =>
         leftPart: {
             width: '20%',
             maxWidth: '20rem',
-            minWidth: '12rem',
-            height: '100%',
+            minWidth: '12.5rem',
+            height: 'fill-available',
             backgroundColor: 'rgba(3, 169, 244, 0.85)',
             display: 'flex',
             flexDirection: 'column',
+            flex: 1,
             flexWrap: 'nowrap',
             alignItems: 'center',
-            justifyContent: 'space-between'
+            justifyContent: 'space-between',
+            position: 'fixed',
+
         },
         linkButton: {
             textAlign: 'left',
@@ -149,11 +169,10 @@ export const styles = () =>
         },
         rightPanel: {
             height: '100%',
-            width: '40rem'
+            width: '40rem',
+            marginLeft: 'max(11rem, 20%)'
         },
         root: {
-            width: '100%',
-            height: '100%',
             display: 'flex',
             flexDirection: 'row',
             backgroundColor: 'transparent'

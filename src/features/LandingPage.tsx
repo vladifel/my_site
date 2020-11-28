@@ -17,12 +17,14 @@ import ContactMe from "./ContactMe";
 import Portfolio from "./Portfolio";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { styles } from "./LandingPage.styles";
+import AboutMe from "./AboutMe";
 
 interface IButtonActions {
     buttonHover: string;
     handleHoverIn: (buttonType: string) => void;
     handleHoverOut: () => void;
     handleButtonClick: (event: any) => void;
+    popOutOpen: string;
 }
 interface ILandingPageProps {
 
@@ -43,13 +45,18 @@ const linkButtonComponent = (buttonText: string, buttonActions: IButtonActions, 
             disableRipple
         >
             <Typography
-                className={classNames(props.classes.headTextColor, hoverOn && props.classes.linkButtonHover)}
+                className={classNames(
+                    props.classes.headTextColor,
+                    (hoverOn || buttonActions.popOutOpen === buttonText) && props.classes.linkButtonHover)}
             >
                 {buttonText}
             </Typography>
-            {hoverOn
+            {(hoverOn || buttonActions.popOutOpen === buttonText)
                 ? <TiChevronRightOutline
-                    className={classNames(props.classes.headTextColor, props.classes.linkButtonChevron)}
+                    className={classNames(
+                        props.classes.headTextColor,
+                        props.classes.linkButtonChevron
+                    )}
                 />
                 : undefined}
         </Button>
@@ -78,6 +85,19 @@ const iconButtonComponent = (buttonType: string, linkText: string, icon: JSX.Ele
                 {icon}
             </Link>
         </IconButton>
+    )
+}
+
+const aboutMeComponent = (matches1000: boolean, props: ILandingPageCombinedProps) => {
+    return (
+        <Grid container className={classNames(
+            props.classes.popOutContainer,
+            matches1000
+                ? props.classes.aboutMeOuterSmall
+                : props.classes.aboutMeOuter)
+        }>
+            <AboutMe />
+        </Grid>
     )
 }
 
@@ -118,7 +138,7 @@ const myCVComponent = (props: ILandingPageCombinedProps) => {
 
 const LandingPage: React.FunctionComponent<ILandingPageCombinedProps> = (props: ILandingPageCombinedProps) => {
     const [buttonHover, setButtonHover] = useState<string>('');
-    const [popOutOpen, setPopOutOpen] = useState<string>('Portfolio');
+    const [popOutOpen, setPopOutOpen] = useState<string>('About Me');
 
     const handleHoverIn = (buttonType: string) => {
         setButtonHover(buttonType);
@@ -136,15 +156,12 @@ const LandingPage: React.FunctionComponent<ILandingPageCombinedProps> = (props: 
         buttonHover: buttonHover,
         handleHoverIn: handleHoverIn,
         handleHoverOut: handleHoverOut,
-        handleButtonClick: handleButtonClick
+        handleButtonClick: handleButtonClick,
+        popOutOpen: popOutOpen
     }
     const matches = useMediaQuery('(max-width:600px)');
     const matches1000 = useMediaQuery('(max-width:1000px)');
     const matchesHeight = useMediaQuery('(max-height:560px)');
-    useEffect(() => {
-        console.log(matches, matchesHeight)
-
-    }, [matches, matchesHeight])
     return (
         <Grid className={props.classes.root}>
             <Grid container className={props.classes.leftPart}>
@@ -182,6 +199,7 @@ const LandingPage: React.FunctionComponent<ILandingPageCombinedProps> = (props: 
                     </Grid>
                 </Grid>
                 <Grid container className={classNames(props.classes.linksContainer, matchesHeight && props.classes.linksContainerSmall)}>
+                    {linkButtonComponent('About Me', buttonActions, props)}
                     {linkButtonComponent('Portfolio', buttonActions, props)}
                     {linkButtonComponent('My CV', buttonActions, props)}
                     {linkButtonComponent('Contact Me', buttonActions, props)}
@@ -200,7 +218,9 @@ const LandingPage: React.FunctionComponent<ILandingPageCombinedProps> = (props: 
                         ? myCVComponent(props)
                         : popOutOpen === 'Contact Me'
                             ? contactMeComponent(props)
-                            : undefined}
+                            : popOutOpen === 'About Me'
+                                ? aboutMeComponent(matches1000, props)
+                                : undefined}
             </Grid>
         </Grid>
     );

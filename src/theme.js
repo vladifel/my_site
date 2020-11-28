@@ -9,7 +9,5 @@ export default createMuiTheme({
     },
     typography: {
         fontFamily: ['BioRhyme'],
-        //textAlign: 'left',
-        //fontSize: '20px'
     },
 });
