@@ -7,7 +7,7 @@ export const styles = () =>
             justifyContent: 'center',
             alignItems: 'center',
             top: '12%',
-            height: '68%',
+            height: '50%',
             width: '70%',
             maxWidth: '40rem',
             minWidth: '381px',
@@ -19,8 +19,8 @@ export const styles = () =>
             justifyContent: 'center',
             alignItems: 'center',
             top: '10%',
-            height: '75%',
-            width: '60%',
+            height: '65%',
+            width: '70%',
             marginLeft: '2rem'
         },
         aboutMeOuterMobile: {
